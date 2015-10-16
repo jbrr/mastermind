@@ -1,4 +1,8 @@
 class MasterMind
+  def initialize
+    secret_code
+  end
+  
   def start
     puts "Welcome to MASTERMIND"
 
@@ -26,25 +30,28 @@ class MasterMind
 
   def secret_code
     colors = ["r", "g", "b", "y"]
-    code = []
+    @code = []
     4.times do
-      code << colors.sample
+      @code << colors.sample
     end
+    @code
   end
 
   def play
     play_intro
-    perm_secret_code = secret_code
     guess = gets.chomp.downcase
-    if guess.length > 4
+    guess_count = 0
+
+    if guess == "q"
+      abort("Thanks for playing!")
+    elsif guess == "c"
+      puts @code.join(",")
+      play
+    elsif guess.length > 4
       puts "Too many characters, please enter four characters"
       play
     elsif guess.length < 4
       puts "Too few characters, please enter four characters"
-    elsif guess == "q"
-      abort("Thanks for playing!")
-    elsif guess == "c"
-      puts perm_secret_code
       play
     else
       puts "Please enter either 'r', 'g', 'b', 'y', or 'q' to quit"
