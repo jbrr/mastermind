@@ -41,10 +41,10 @@ class MasterMind
   def play
     play_intro
     guess = gets.chomp.downcase
-    guess_count = 0
+    @guess_count += 1
 
     if guess == @code
-      puts "Congratulations! You guess the sequence '#{@code}' in #{guess_count} guesses!"
+      puts "Congratulations! You guess the sequence '#{@code}' in #{@guess_count} guesses!"
     elsif guess == "q"
       abort("Thanks for playing!")
     elsif guess == "c"
@@ -58,7 +58,6 @@ class MasterMind
       play
     else
       puts "Not correct, try again!"
-      @guess_count = @guess_count + 1
       play
     end
   end
