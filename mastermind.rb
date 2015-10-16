@@ -45,9 +45,8 @@ class MasterMind
     @guess_count += 1
 
     if guess == @code
-      finish = Time.now
-      total_time = finish - @start
-      puts "Congratulations! You guess the sequence '#{@code}' in #{@guess_count} guesses in #{total_time} seconds!"
+      total_time = (Time.now - @start).to_i / 60
+      puts "Congratulations! You guess the sequence '#{@code}' in #{@guess_count} guesses in #{total_time} minutes!"
     elsif guess == "q"
       abort("Thanks for playing!")
     elsif guess == "c"
