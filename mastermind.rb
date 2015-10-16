@@ -46,7 +46,14 @@ class MasterMind
   end
 
   def correct_element(guess)
-    
+    guess_ary = guess.split("")
+    count = 0
+    guess_ary.each do |guess|
+      if @code.include?(guess)
+        count += 1
+      end
+    end
+    count
   end
 
   def play
@@ -56,7 +63,7 @@ class MasterMind
     position_count(guess)
     correct_element(guess)
 
-    if guess == @code
+    if guess == @code.join("")
       total_time = (Time.now - @start).to_i / 60
       puts "Congratulations! You guess the sequence '#{@code.join(",")}' in #{@guess_count} guesses in #{total_time} minutes!"
     elsif guess == "q"
@@ -71,7 +78,7 @@ class MasterMind
       puts "Too few characters, please enter four characters"
       play
     else
-      puts "#{guess} has #{position_count(guess)} elements in the right position!"
+      puts "#{guess} has #{correct_element(guess)} of the correct elements with #{position_count(guess)} elements in the right position!"
       play
     end
   end
