@@ -36,21 +36,33 @@ class MasterMind
     4.times do
       code << colors.sample
     end
-    @code = code.join
+    @code = code
+  end
+
+  def position_count(guess)
+    guess_ary = guess.split("")
+    truth_ary = @code.zip(guess_ary).map { |x, y| x == y}
+    truth_ary.count(true)
+  end
+
+  def correct_element(guess)
+    
   end
 
   def play
     play_intro
     guess = gets.chomp.downcase
     @guess_count += 1
+    position_count(guess)
+    correct_element(guess)
 
     if guess == @code
       total_time = (Time.now - @start).to_i / 60
-      puts "Congratulations! You guess the sequence '#{@code}' in #{@guess_count} guesses in #{total_time} minutes!"
+      puts "Congratulations! You guess the sequence '#{@code.join(",")}' in #{@guess_count} guesses in #{total_time} minutes!"
     elsif guess == "q"
       abort("Thanks for playing!")
     elsif guess == "c"
-      puts @code
+      puts @code.join(",")
       play
     elsif guess.length > 4
       puts "Too many characters, please enter four characters"
@@ -59,7 +71,7 @@ class MasterMind
       puts "Too few characters, please enter four characters"
       play
     else
-      puts "Not correct, try again!"
+      puts "#{guess} has #{position_count(guess)} elements in the right position!"
       play
     end
   end
