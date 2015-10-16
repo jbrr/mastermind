@@ -47,10 +47,12 @@ class MasterMind
 
   def correct_element(guess)
     guess_ary = guess.split("")
+    duplicate_code = @code.dup
     count = 0
     guess_ary.each do |guess|
-      if @code.include?(guess)
+      if duplicate_code.include?(guess)
         count += 1
+        duplicate_code.delete(guess)
       end
     end
     count
