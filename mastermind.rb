@@ -25,11 +25,31 @@ class MasterMind
   end
 
   def secret_code
-    []
+    colors = ["r", "g", "b", "y"]
+    code = []
+    4.times do
+      code << colors.sample
+    end
   end
 
   def play
     play_intro
+    perm_secret_code = secret_code
+    guess = gets.chomp.downcase
+    if guess.length > 4
+      puts "Too many characters, please enter four characters"
+      play
+    elsif guess.length < 4
+      puts "Too few characters, please enter four characters"
+    elsif guess == "q"
+      abort("Thanks for playing!")
+    elsif guess == "c"
+      puts perm_secret_code
+      play
+    else
+      puts "Please enter either 'r', 'g', 'b', 'y', or 'q' to quit"
+      play
+    end
   end
 
   def instructions
