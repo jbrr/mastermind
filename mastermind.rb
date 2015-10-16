@@ -1,7 +1,8 @@
 class MasterMind
   def initialize
     secret_code
-    @guess_count = 0
+    @start = Time.now
+    @guess_count = -1
   end
 
   def start
@@ -44,7 +45,9 @@ class MasterMind
     @guess_count += 1
 
     if guess == @code
-      puts "Congratulations! You guess the sequence '#{@code}' in #{@guess_count} guesses!"
+      finish = Time.now
+      total_time = finish - @start
+      puts "Congratulations! You guess the sequence '#{@code}' in #{@guess_count} guesses in #{total_time} seconds!"
     elsif guess == "q"
       abort("Thanks for playing!")
     elsif guess == "c"
