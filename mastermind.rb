@@ -64,8 +64,8 @@ class MasterMind
     correct_element(guess)
 
     if guess == @code.join("")
-      total_time = (Time.now - @start).to_i / 60
-      puts "Congratulations! You guess the sequence '#{@code.join(",")}' in #{@guess_count} guesses in #{total_time} minutes!"
+      total_time = (Time.now - @start).to_i
+      puts "Congratulations! You guess the sequence '#{@code.join(",")}' in #{@guess_count} guesses in #{total_time} seconds!"
     elsif guess == "q"
       abort("Thanks for playing!")
     elsif guess == "c"
